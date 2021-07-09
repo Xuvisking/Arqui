@@ -18,15 +18,29 @@ def tragamonedas(monedas):
 
     option = "s"    
 
-    while(option != "n"):
-    
-        dinero = int(input("Ingrese el monto que desea apostar \n"))
+    while(option != "n"):    
+        
         try:
+            dinero = int(input("Ingrese el monto que desea apostar \n"))
+            print ("") 
             if (dinero <= 0): 
-                print("Monto inválido, reingrese su apuesta") 
-        except:
-            print("Ingrese un valor numérico \n")     
- 
+                dinero = int(input("Monto inválido, reingrese su apuesta \n"))
+
+            if ((monedas - dinero) <0 ): 
+                dinero = int(input("No puede apostar más de lo que tiene en su monedero, reingrese apuesta \n"))           
+                            
+        except ValueError:
+            print("Ingrese un valor numérico \n")
+            dinero = int(input("Ingrese el monto que desea apostar \n"))
+            if (dinero <= 0): 
+                dinero = int(input("Monto inválido, reingrese su apuesta \n"))
+
+            if ((monedas - dinero) <0 ): 
+                dinero = int(input("No puede apostar más de lo que tiene en su monedero, reingrese apuesta \n"))     
+
+        
+
+        monedas -= dinero
         numeros = []
         counter  = [0,0,0,0,0]
 
@@ -46,16 +60,27 @@ def tragamonedas(monedas):
         print("")
         print("Tus números fueron: ",numeros[0], numeros[1], numeros[2], numeros[3], numeros[4], "\n")
 
-        if(premio == 0):print("Ningún número coincide, recibes: 0")
-        elif(premio == 2):print("Dos números coinciden, recuperas tus: ", dinero)   
-        elif(premio == 3):print("Tres números coinciden, recibes: ", dinero*1.5)
-        elif(premio == 4):print("Cuatro números coinciden, recibes: ", dinero*2)
-        elif(premio == 5):print("Todos tus números coinciden, felicidades!!!, recibes: ", dinero*3)
+        if(premio == 0):
+            print("Ningún número coincide, recibes: 0") 
+        elif(premio == 2):
+            print("Dos números coinciden, recuperas tus: ", dinero)
+            monedas += dinero   
+        elif(premio == 3):
+            print("Tres números coinciden, recibes: ", dinero*1.5)
+            monedas += dinero*1.5
+        elif(premio == 4):
+            print("Cuatro números coinciden, recibes: ", dinero*2)
+            monedas += dinero*2
+        elif(premio == 5):
+            print("Todos tus números coinciden, felicidades!!!, recibes: ", dinero*3)
+            monedas += dinero*3
 
         option = input("Desea volver a jugar? (s/n) ")
         option = option.lower()
         print("")
 
+    return monedas    
+
 
 if (__name__== '__main__'):
-    tragamonedas()         
+    tragamonedas(1000)         
