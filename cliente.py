@@ -1,6 +1,9 @@
 import ruleta
 import Tragamonedas
 
+def Registro():
+	return True
+
 def Inicio_sesion():
 	user = input("Usuario: ")
 	password = input("Contraseña: ")
@@ -11,6 +14,7 @@ def Cerrar_sesion():
 
 monedero = 0
 exit = True
+sesion = True
 
 print("	  __^__                                      __^__")
 print("         ( ___ )------------------------------------( ___ )")
@@ -24,13 +28,32 @@ print("1. BlackJack")
 print("2. Ruleta")
 print("3. Maquina Tragamonedas\n")
 
-print("Antes que nada, hay que iniciar sesion")
+while sesion == True:
+	print("¿Deseas iniciar sesion o registrarte?\n")
+	print("1. Iniciar Sesion")
+	print("2. Registrarte\n")
 
-res, monedero  = Inicio_sesion()
+	sesion_option = input("Opcion => ")
 
-if res == False:
-	print("Error al iniciar sesion, vuelva intentarlo")
-	res, monedero = Inicio_sesion()
+	if sesion_option == "1":
+		res, monedero  = Inicio_sesion()
+
+		if res == False:
+			print("Error al iniciar sesion, vuelva intentarlo\n")
+
+		if res == True:
+			print("¡Exito al iniciar sesion!\n")
+			sesion = False
+
+
+	if sesion_option == "2":
+		res = Registro()
+
+		if res == False:
+			print("Error al registrarte, intentalo nuevamente\n")
+
+		if res == True:
+			print("¡Exito al registrarte!\n")	
 
 if monedero == 0:
 	print("---ALERTA---")
